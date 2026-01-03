@@ -86,17 +86,22 @@ bool solve_sudoku() {
   return false;
 }
 
+// Handles the visual formatting of the 9x9 grid in the console
 void print_sudoku() {
     printf("\n");
-    //A line of dashes is needed to separate different rows, double the number of rows and add one
-    // 9 * 2 + 1 = 19, on odd rows print out dashes, on even rows print out cell values from sudoku indexed by half of new value minus one
+    // A line of dashes is needed to separate different rows, double the number of rows and add one
+    // 9 * 2 + 1 = 19, on odd rows print out dashes, on even rows print out cell values
+    // from sudoku indexed by half of new value minus one
     for (int row = 1; row <= 19; row++) {
         if(row % 2){
+    // Logic for odd rows: Printing horizontal boundaries (+---+---+)
             printf("+");
             for(int dash = 1; dash < 36; dash++){
+            //at the end of every cell add a plus
                 if(dash % 4 == 0){
                     printf("+");
                 }
+             //while in a cell print a dash
                 else{
                 printf("%c", '-');
                 }
@@ -104,6 +109,7 @@ void print_sudoku() {
         printf("+%c", '\n');
         }
         else{
+            // Logic for odd rows: Printing horizontal boundaries (+---+---+)
             printf("%c", '|');
             for (int col = 0; col < 9; col++) {
                 printf(" %d |", sudoku[row/2 - 1][col]);
