@@ -93,12 +93,16 @@ void print_sudoku() {
     for (int row = 1; row <= 19; row++) {
         if(row % 2){
             printf("+");
-                for(int dash = 0; dash < 35; dash++){
+            for(int dash = 1; dash < 36; dash++){
+                if(dash % 4 == 0){
+                    printf("+");
+                }
+                else{
                 printf("%c", '-');
+                }
             }
-            printf("+%c", '\n');
+        printf("+%c", '\n');
         }
-
         else{
             printf("%c", '|');
             for (int col = 0; col < 9; col++) {
