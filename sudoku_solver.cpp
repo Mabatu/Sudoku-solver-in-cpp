@@ -61,7 +61,7 @@ bool find_empty_cell(int &row, int &col) {
       if (sudoku[row][col] == 0) {
         return true;
       }
-    }  
+    }
   }
   return false;
 }
@@ -77,55 +77,60 @@ bool solve_sudoku() {
         sudoku[row][col] = num; // Place the number
 
         if (solve_sudoku()) {
-          return true; 
+          return true;
           }
       sudoku[row][col] = 0; // Reset the cell and backtrack
       }
-    }  
+    }
   }
-  return false; 
+  return false;
 }
 
 void print_sudoku() {
-  printf("\n");
-  for (int row = 0; row < 9; row++) {
-    for (int col = 0; col < 9; col++) {
-      printf("%d,", sudoku[row][col]);
-      if (col == 2 || col == 5) {
-        printf("\t");
-            }
-        }
-      if (row == 2 || row == 5) {
-        printf("\n");
-      }
     printf("\n");
-  }
+    for (int row = 1; row <= 19; row++) {
+        if(row % 2){
+            printf("+");
+                for(int dash = 0; dash < 35; dash++){
+                printf("%c", '-');
+            }
+            printf("+%c", '\n');
+        }
+
+        else{
+            printf("%c", '|');
+            for (int col = 0; col < 9; col++) {
+                printf(" %d |", sudoku[row/2 - 1][col]);
+            }
+            printf("\n");
+        }
+    }
 }
 
 int main(){
-  int k = 0;
-  const char* pos;
-  for(int i = 0; i < 9; i++){
+    int k = 0;
+    const char* pos;
+    for(int i = 0; i < 9; i++){
     if (i == 0){pos = "st";};
     if (i == 1){pos = "nd";}
     if (i == 2){pos = "rd";}
     if (i >= 3){pos = "th";}
-	printf("Enter %d%s row: \n", i + 1, pos);
-	std::cin >> k;
-	for(int j = 0; j < 9; j++){
-	  sudoku[i][j] = (k / static_cast<int>(pow(10, (8 - j))))%10;
+    printf("Enter %d%s row: \n", i + 1, pos);
+    std::cin >> k;
+    for(int j = 0; j < 9; j++){
+      sudoku[i][j] = (k / static_cast<int>(pow(10, (8 - j))))%10;
     }
-	k = 0;
-  }
-  printf("\n UNSOLVED SUDOKU");
-  print_sudoku();
-  
-  if (solve_sudoku()) {
+    k = 0;
+    }
+    printf("\n UNSOLVED SUDOKU");
+    print_sudoku();
+
+    if (solve_sudoku()) {
     printf("\n SOLVED SUDOKU");
     print_sudoku();
-  } 
-  else {
+    }
+    else {
     printf("No solution exists.\n");
-  }
-  return 0;
-}	
+    }
+    return 0;
+}
