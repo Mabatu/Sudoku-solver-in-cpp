@@ -1,5 +1,5 @@
 #include <iostream>
-#include <math.h>
+#include <cmath>
 
 struct limits {
     int lower_limit;
@@ -88,33 +88,33 @@ bool solve_sudoku() {
 
 // Handles the visual formatting of the 9x9 grid in the console
 void print_sudoku() {
-    printf("\n");
+    std::cout << '\n';
     // A line of dashes is needed to separate different rows, double the number of rows and add one
     // 9 * 2 + 1 = 19, on odd rows print out dashes, on even rows print out cell values
     // from sudoku indexed by half of new value minus one
     for (int row = 1; row <= 19; row++) {
         if(row % 2){
     // Logic for odd rows: Printing horizontal boundaries (+---+---+)
-            printf("+");
+            std::cout << '+';
             for(int dash = 1; dash < 36; dash++){
             //at the end of every cell add a plus
                 if(dash % 4 == 0){
-                    printf("+");
+                    std::cout << '+';
                 }
              //while in a cell print a dash
                 else{
-                printf("%c", '-');
+                std::cout << '-';
                 }
             }
-        printf("+%c", '\n');
+        std::cout << "+\n";
         }
         else{
-            // Logic for odd rows: Printing horizontal boundaries (+---+---+)
-            printf("%c", '|');
+            // Logic to print cell values and vertical separators: | 1 | 2 |...
+            std::cout << '|';
             for (int col = 0; col < 9; col++) {
-                printf(" %d |", sudoku[row/2 - 1][col]);
+                std::cout << ' ' << sudoku[row/2 - 1][col] << " |";
             }
-            printf("\n");
+            std::cout << '\n';
         }
     }
 }
@@ -127,22 +127,22 @@ int main(){
         if (i == 1){pos = "nd";}
         if (i == 2){pos = "rd";}
         if (i >= 3){pos = "th";}
-        printf("Enter %d%s row: \n", i + 1, pos);
+        std::cout << "Enter " << i + 1 << ' ' << pos << " row: \n";
         std::cin >> k;
         for(int j = 0; j < 9; j++){
             sudoku[i][j] = (k / static_cast<int>(pow(10, (8 - j))))%10;
         }
         k = 0;
     }
-    printf("\n UNSOLVED SUDOKU");
+    std::cout << "\n UNSOLVED SUDOKU";
     print_sudoku();
 
     if (solve_sudoku()) {
-        printf("\n SOLVED SUDOKU");
+        std::cout << "\n SOLVED SUDOKU";
         print_sudoku();
     }
     else {
-        printf("No solution exists.\n");
+        std::cout << "No solution exists.\n";
     }
     return 0;
 }
