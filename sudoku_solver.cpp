@@ -88,6 +88,8 @@ bool solve_sudoku() {
 
 void print_sudoku() {
     printf("\n");
+    //A line of dashes is needed to separate different rows, double the number of rows and add one
+    // 9 * 2 + 1 = 19, on odd rows print out dashes, on even rows print out cell values from sudoku indexed by half of new value minus one
     for (int row = 1; row <= 19; row++) {
         if(row % 2){
             printf("+");
@@ -111,26 +113,26 @@ int main(){
     int k = 0;
     const char* pos;
     for(int i = 0; i < 9; i++){
-    if (i == 0){pos = "st";};
-    if (i == 1){pos = "nd";}
-    if (i == 2){pos = "rd";}
-    if (i >= 3){pos = "th";}
-    printf("Enter %d%s row: \n", i + 1, pos);
-    std::cin >> k;
-    for(int j = 0; j < 9; j++){
-      sudoku[i][j] = (k / static_cast<int>(pow(10, (8 - j))))%10;
-    }
-    k = 0;
+        if (i == 0){pos = "st";};
+        if (i == 1){pos = "nd";}
+        if (i == 2){pos = "rd";}
+        if (i >= 3){pos = "th";}
+        printf("Enter %d%s row: \n", i + 1, pos);
+        std::cin >> k;
+        for(int j = 0; j < 9; j++){
+            sudoku[i][j] = (k / static_cast<int>(pow(10, (8 - j))))%10;
+        }
+        k = 0;
     }
     printf("\n UNSOLVED SUDOKU");
     print_sudoku();
 
     if (solve_sudoku()) {
-    printf("\n SOLVED SUDOKU");
-    print_sudoku();
+        printf("\n SOLVED SUDOKU");
+        print_sudoku();
     }
     else {
-    printf("No solution exists.\n");
+        printf("No solution exists.\n");
     }
     return 0;
 }
